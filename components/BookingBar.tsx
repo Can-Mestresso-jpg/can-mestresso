@@ -1,8 +1,12 @@
  "use client";
 
 import { useMemo, useState } from "react";
-import { differenceInCalendarDays } from "date-fns";
+import {
+  differenceInCalendarDays,
+  format,
+} from "date-fns";
 import { DateRange } from "react-day-picker";
+
 import DateRangePicker from "./DateRangePicker";
 
 export default function BookingBar() {
@@ -17,16 +21,25 @@ export default function BookingBar() {
   const canSearch = !!range?.from && !!range?.to;
 
   function handleAvailability() {
-    if (!canSearch) return;
+    if (!canSearch || !range?.from || !range?.to) return;
 
-    alert(
-      `Searching availability\n\n${range.from?.toDateString()} → ${range.to?.toDateString()}\n${nights} nights`
-    );
+    const checkIn = format(range.from, "dd MMMM yyyy");
+    const checkOut = format(range.to, "dd MMMM yyyy");
 
-    // Más adelante:
-    // router.push(...)
-    // abrir formulario
-    // consultar API
+    const message = `Hello,
+
+I would like to check the availability for Can Mestresso.
+
+Check-in: ${checkIn}
+Check-out: ${checkOut}
+Length of stay: ${nights} night${nights > 1 ? "s" : ""}
+
+Thank you.`;
+
+    const whatsappUrl =
+      `https://wa.me/34630445982?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank");
   }
 
   return (

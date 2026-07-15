@@ -35,7 +35,7 @@ export default function Contact() {
           {/* Email */}
 
           <a
-            href="mailto:info@canmestresso.com"
+            href="mailto:casaisladeibiza@gmail.com"
             className="rounded-3xl border border-gray-200 bg-white p-8 text-center transition duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             <Mail className="mx-auto mb-5 h-8 w-8" />
@@ -45,7 +45,7 @@ export default function Contact() {
             </h3>
 
             <p className="mt-3 text-gray-600 break-all">
-              info@canmestresso.com
+              casaisladeibiza@gmail.com
             </p>
           </a>
 
@@ -62,14 +62,14 @@ export default function Contact() {
             </h3>
 
             <p className="mt-3 text-gray-600">
-              +34 600 111 222
+              +34 630 44 59 82
             </p>
           </a>
 
           {/* WhatsApp */}
 
           <a
-            href="https://wa.me/34600111222"
+            href="https://wa.me/34630445982"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-3xl border border-gray-200 bg-white p-8 text-center transition duration-300 hover:-translate-y-1 hover:shadow-xl"

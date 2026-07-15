@@ -2,6 +2,16 @@
 
 import { motion } from "framer-motion";
 
+const whatsappUrl =
+  "https://wa.me/34630445982?text=" +
+  encodeURIComponent(`Hello,
+
+I would like to book Can Mestresso.
+
+Could you please send me the availability and prices?
+
+Thank you.`);
+
 export default function Hero() {
   return (
     <section
@@ -36,17 +46,14 @@ export default function Hero() {
         }}
         className="relative z-10 flex w-full max-w-6xl flex-col items-center px-6 pt-28 text-center text-white sm:px-10 lg:px-12"
       >
-        {/* Eyebrow */}
         <p className="mb-6 text-xs uppercase tracking-[0.45em] text-gray-200 sm:text-sm">
           Ibiza · Mediterranean Luxury Retreat
         </p>
 
-        {/* Title */}
         <h1 className="max-w-5xl text-5xl font-light leading-none tracking-wide sm:text-6xl lg:text-8xl">
           Can Mestresso
         </h1>
 
-        {/* Subtitle */}
         <p className="mt-8 max-w-3xl text-base leading-7 text-gray-200 sm:text-lg sm:leading-8 lg:text-xl">
           Discover an authentic Ibizan villa where privacy, Mediterranean
           elegance and unforgettable sunsets come together to create a truly
@@ -57,7 +64,9 @@ export default function Hero() {
         <div className="mt-12 flex w-full max-w-md flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center">
 
           <a
-            href="#booking"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full rounded-full bg-white px-8 py-4 text-center text-sm font-semibold uppercase tracking-[0.15em] text-black transition duration-300 hover:-translate-y-1 hover:bg-gray-100 sm:w-auto"
           >
             Book Your Stay

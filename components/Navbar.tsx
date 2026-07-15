@@ -12,6 +12,18 @@ const links = [
   { name: "Contact", href: "#contact" },
 ];
 
+const whatsappUrl =
+  "https://wa.me/34630445982?text=" +
+  encodeURIComponent(
+    `Hello,
+
+I would like to book Can Mestresso.
+
+Could you please send me the availability and prices?
+
+Thank you.`
+  );
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,11 +39,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = open ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
@@ -50,6 +58,7 @@ export default function Navbar() {
         <nav className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-10">
 
           {/* Logo */}
+
           <Link
             href="#home"
             className={`transition-all duration-300 ${
@@ -66,7 +75,9 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
+
           <div className="hidden items-center gap-10 lg:flex">
+
             {links.map((link) => (
               <Link
                 key={link.name}
@@ -80,11 +91,15 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
           </div>
 
-          {/* Desktop CTA */}
-          <Link
-            href="#booking"
+          {/* Desktop WhatsApp */}
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`hidden rounded-full px-7 py-3 text-sm uppercase tracking-[0.15em] transition lg:block ${
               scrolled
                 ? "bg-black text-white hover:bg-gray-800"
@@ -92,9 +107,10 @@ export default function Navbar() {
             }`}
           >
             Book Now
-          </Link>
+          </a>
 
-          {/* Mobile Button */}
+          {/* Mobile Menu Button */}
+
           <button
             onClick={() => setOpen(true)}
             className={`lg:hidden ${
@@ -109,6 +125,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Menu */}
+
       <div
         className={`fixed inset-0 z-[100] bg-white transition-transform duration-500 ${
           open ? "translate-x-0" : "translate-x-full"
@@ -158,13 +175,15 @@ export default function Navbar() {
 
           </div>
 
-          <Link
-            href="#booking"
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="rounded-full bg-black py-5 text-center text-white"
+            className="rounded-full bg-black py-5 text-center text-white transition hover:bg-gray-800"
           >
             Book Your Stay
-          </Link>
+          </a>
 
         </div>
       </div>
