@@ -1,12 +1,11 @@
-"use client";
+ "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CalendarDays } from "lucide-react";
 import { DayPicker, DateRange } from "react-day-picker";
 import {
   addDays,
   format,
-  isBefore,
   startOfDay,
 } from "date-fns";
 
@@ -26,13 +25,18 @@ export default function DateRangePicker({
 }: Props) {
   const [open, setOpen] = useState(false);
   const [bookedDates, setBookedDates] = useState<Date[]>([]);
+  const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadCalendar() {
       try {
         const res = await fetch("/api/calendar");
 
-        if (!res.ok) return;
+        if (!res.ok) {
+          console.error("Calendar API returned", res.status);
+          return;
+        }
 
         const events: CalendarEvent[] = await res.json();
 
@@ -51,10 +55,28 @@ export default function DateRangePicker({
         setBookedDates(dates);
       } catch (err) {
         console.error("Unable to load calendar", err);
+      } finally {
+        setLoading(false);
       }
     }
 
     loadCalendar();
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const disabledDays = useMemo(() => {
@@ -67,7 +89,7 @@ export default function DateRangePicker({
   }, [bookedDates]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
 
       <button
         onClick={() => setOpen(!open)}
@@ -104,19 +126,25 @@ export default function DateRangePicker({
       {open && (
         <div className="absolute left-0 top-20 z-50 rounded-3xl bg-white p-6 shadow-2xl">
 
-          <DayPicker
-            mode="range"
-            numberOfMonths={2}
-            selected={range}
-            disabled={disabledDays}
-            onSelect={(value) => {
-              setRange(value);
+          {loading ? (
+            <p className="p-6 text-sm text-gray-400">
+              Loading availability...
+            </p>
+          ) : (
+            <DayPicker
+              mode="range"
+              numberOfMonths={2}
+              selected={range}
+              disabled={disabledDays}
+              onSelect={(value) => {
+                setRange(value);
 
-              if (value?.from && value?.to) {
-                setOpen(false);
-              }
-            }}
-          />
+                if (value?.from && value?.to) {
+                  setOpen(false);
+                }
+              }}
+            />
+          )}
 
         </div>
       )}
