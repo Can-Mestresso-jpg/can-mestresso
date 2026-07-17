@@ -28,6 +28,7 @@ export default function Gallery() {
     >
       <FadeIn delay={0.2}>
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
+
           {/* Heading */}
 
           <div className="mb-16 text-center">
@@ -45,9 +46,47 @@ export default function Gallery() {
             </p>
           </div>
 
-          {/* Gallery */}
+          {/* ================= MOBILE ================= */}
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[280px]">
+          <div className="grid grid-cols-1 gap-5 lg:hidden">
+            {gallery.map((image, i) => (
+              <motion.div
+                key={image.src}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => {
+                  setIndex(i);
+                  setOpen(true);
+                }}
+                className="group relative h-72 overflow-hidden rounded-3xl cursor-pointer"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-cover transition duration-700 group-hover:scale-110"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                <div className="absolute bottom-6 left-6 text-white">
+                  <p className="mb-2 text-xs uppercase tracking-[0.35em] text-white/80">
+                    {image.category}
+                  </p>
+
+                  <h3 className="text-2xl font-light">
+                    {image.alt}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* ================= DESKTOP ================= */}
+
+          <div className="hidden lg:grid lg:grid-cols-4 lg:auto-rows-[280px] gap-5">
             {gallery.map((image, i) => (
               <motion.div
                 key={image.src}
@@ -57,45 +96,36 @@ export default function Gallery() {
                   setIndex(i);
                   setOpen(true);
                 }}
-                className={`group relative overflow-hidden rounded-3xl cursor-pointer
-                  h-[260px]
-                  sm:h-[320px]
-                  lg:h-auto
-                  ${
-                    i === 0
-                      ? "lg:col-span-2 lg:row-span-2 lg:min-h-[580px]"
-                      : ""
-                  }`}
+                className={`group relative overflow-hidden rounded-3xl cursor-pointer ${
+                  i === 0
+                    ? "col-span-2 row-span-2"
+                    : ""
+                }`}
               >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   priority={i === 0}
-                  sizes="(max-width:640px) 100vw,
-                         (max-width:1024px) 50vw,
-                         25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="25vw"
+                  className="object-cover transition duration-700 group-hover:scale-110"
                 />
 
-                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                {/* Text */}
-
-                <div className="absolute bottom-6 left-6 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="absolute bottom-6 left-6 translate-y-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   <p className="mb-2 text-xs uppercase tracking-[0.35em] text-white/80">
                     {image.category}
                   </p>
 
-                  <h3 className="text-xl sm:text-2xl font-light text-white">
+                  <h3 className="text-2xl font-light text-white">
                     {image.alt}
                   </h3>
                 </div>
               </motion.div>
             ))}
           </div>
+
         </div>
 
         <Lightbox
