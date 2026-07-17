@@ -47,7 +47,7 @@ export default function Gallery() {
 
           {/* Gallery */}
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[280px]">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[280px]">
             {gallery.map((image, i) => (
               <motion.div
                 key={image.src}
@@ -57,26 +57,30 @@ export default function Gallery() {
                   setIndex(i);
                   setOpen(true);
                 }}
-                className={`group relative cursor-pointer overflow-hidden rounded-3xl ${
-                  i === 0
-                    ? "sm:col-span-2 sm:row-span-2"
-                    : ""
-                }`}
+                className={`group relative overflow-hidden rounded-3xl cursor-pointer
+                  h-[260px]
+                  sm:h-[320px]
+                  lg:h-auto
+                  ${
+                    i === 0
+                      ? "lg:col-span-2 lg:row-span-2 lg:min-h-[580px]"
+                      : ""
+                  }`}
               >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   priority={i === 0}
-                  sizes="(max-width:768px) 100vw,
-                         (max-width:1200px) 50vw,
+                  sizes="(max-width:640px) 100vw,
+                         (max-width:1024px) 50vw,
                          25vw"
-                  className="object-cover transition duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
-                {/* Dark Overlay */}
+                {/* Overlay */}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {/* Text */}
 
@@ -85,7 +89,7 @@ export default function Gallery() {
                     {image.category}
                   </p>
 
-                  <h3 className="text-2xl font-light text-white">
+                  <h3 className="text-xl sm:text-2xl font-light text-white">
                     {image.alt}
                   </h3>
                 </div>
