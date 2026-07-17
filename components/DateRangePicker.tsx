@@ -74,6 +74,7 @@ export default function DateRangePicker({
     }
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -82,15 +83,33 @@ export default function DateRangePicker({
   const disabledDays = useMemo(() => {
     return [
       {
-        before: new Date(),
+        before: startOfDay(new Date()),
       },
       ...bookedDates,
     ];
   }, [bookedDates]);
 
+  function rangeContainsBookedDay(from: Date, to: Date) {
+    let current = startOfDay(from);
+    const end = startOfDay(to);
+
+    while (current <= end) {
+      const booked = bookedDates.some(
+        (date) => startOfDay(date).getTime() === current.getTime()
+      );
+
+      if (booked) {
+        return true;
+      }
+
+      current = addDays(current, 1);
+    }
+
+    return false;
+  }
+
   return (
     <div className="relative" ref={containerRef}>
-
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-8"
@@ -120,12 +139,10 @@ export default function DateRangePicker({
               : "Select date"}
           </p>
         </div>
-
       </button>
 
       {open && (
         <div className="absolute left-0 top-20 z-50 rounded-3xl bg-white p-6 shadow-2xl">
-
           {loading ? (
             <p className="p-6 text-sm text-gray-400">
               Loading availability...
@@ -137,15 +154,31 @@ export default function DateRangePicker({
               selected={range}
               disabled={disabledDays}
               onSelect={(value) => {
-                setRange(value);
-
-                if (value?.from && value?.to) {
-                  setOpen(false);
+                if (!value) {
+                  setRange(undefined);
+                  return;
                 }
+
+                // Solo check-in seleccionado
+                if (!value.from || !value.to) {
+                  setRange(value);
+                  return;
+                }
+
+                // Hay algún día reservado entre medias
+                if (rangeContainsBookedDay(value.from, value.to)) {
+                  alert(
+                    "The selected stay includes unavailable dates. Please choose another range."
+                  );
+                  setRange(undefined);
+                  return;
+                }
+
+                setRange(value);
+                setOpen(false);
               }}
             />
           )}
-
         </div>
       )}
     </div>
