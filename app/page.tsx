@@ -7,13 +7,16 @@ import BookingBar from "../components/BookingBar";
 import Location from "../components/Location";
 import Contact from "../components/Contact";
 import BookingOptions from "@/components/BookingOptions";
+import QuickFacts from "@/components/QuickFacts";
+
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
       <BookingBar />
-      <About />
+      <QuickFacts />
+
       <Gallery />
       <Experience />
       <Location />

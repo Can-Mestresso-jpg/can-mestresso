@@ -1,71 +1,71 @@
- /*export const gallery = [
+ export const gallery = [
+  // Exterior
   {
-    src: "/gallery/exterior-1.jpg",
-    alt: "Exterior",
+    src: "/gallery/exterior/exterior1.jpg",
+    alt: "Private Pool",
+    category: "Exterior",
+  },
+  {
+    src: "/gallery/exterior/exterior2.jpg",
+    alt: "Garden & Terrace",
+    category: "Exterior",
+  },
+  {
+    src: "/gallery/exterior/exterior3.jpg",
+    alt: "Outdoor Lounge",
+    category: "Exterior",
+  },
+  {
+    src: "/gallery/exterior/exterior4.jpg",
+    alt: "Outdoor Lounge",
     category: "Exterior",
   },
 
+  // Living Room
   {
-    src: "/gallery/pool-1.jpg",
-    alt: "Pool",
-    category: "Pool",
-  },
-
-  {
-    src: "/gallery/living-1.jpg",
+    src: "/gallery/living-room/living1.jpg",
     alt: "Living Room",
-    category: "Living",
+    category: "Interior",
+  },
+  {
+    src: "/gallery/living-room/living2.jpg",
+    alt: "Living Room",
+    category: "Interior",
   },
 
+  // Kitchen
   {
-    src: "/public/habitación1.jpg",
-    alt: "Bedroom 1",
-    category: "Bedrooms",
-  },
-
-  {
-    src: "/gallery/bedroom-2.jpg",
-    alt: "Bedroom 2",
-    category: "Bedrooms",
-  },
-
-  {
-    src: "/gallery/bedroom-3.jpg",
-    alt: "Bedroom 3",
-    category: "Bedrooms",
-  },
-
-  {
-    src: "/gallery/kitchen-1.jpg",
-    alt: "Kitchen",
+    src: "/gallery/kitchen/kitchen1.jpg",
+    alt: "Fully Equipped Kitchen",
     category: "Kitchen",
   },
 
+  // Bedrooms
   {
-    src: "/gallery/bathroom-1.jpg",
-    alt: "Bathroom",
-    category: "Bathrooms",
-  },
-]; */
-export const gallery = [
-  {
-    src: "/piscina.png",
-    alt: "Private Pool",
-    category: "Pool",
-  },
-  {
-    src: "/piscina1.jpg",
-    alt: "Pool View",
-    category: "Pool",
-  },
-  {
-    src: "/habitación1.jpg",
+    src: "/gallery/bedrooms/bedroom1.jpg",
     alt: "Master Bedroom",
-    category: "Bedrooms",
+    category: "Bedroom",
   },
   {
-    src: "/habitacion2.png",
-    alt: "Bedroom",
-    category: "Bedrooms",
+    src: "/gallery/bedrooms/bedroom2.jpg",
+    alt: "Bedroom Two",
+    category: "Bedroom",
+  },
+  {
+    src: "/gallery/bedrooms/bedroom3.jpg",
+    alt: "Bedroom Three",
+    category: "Bedroom",
+  },
+
+  // Bathroom
+  {
+    src: "/gallery/bathroom/bathroom1.jpg",
+    alt: "Bathroom",
+    category: "Bathroom",
+  },
+  {
+    src: "/gallery/bathroom/bathroom2.jpg",
+    alt: "Bathroom",
+    category: "Bathroom",
   },
 ];
