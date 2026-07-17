@@ -22,14 +22,9 @@ export default function Gallery() {
   const [index, setIndex] = useState(0);
 
   return (
-    <section
-      id="gallery"
-      className="bg-white py-16 sm:py-24 lg:py-32"
-    >
+    <section id="gallery" className="bg-white py-16 sm:py-24 lg:py-32">
       <FadeIn delay={0.2}>
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
-
-          {/* Heading */}
 
           <div className="mb-16 text-center">
             <p className="uppercase tracking-[0.35em] text-sm text-gray-500">
@@ -46,47 +41,8 @@ export default function Gallery() {
             </p>
           </div>
 
-          {/* ================= MOBILE ================= */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[260px]">
 
-          <div className="grid grid-cols-1 gap-5 lg:hidden">
-            {gallery.map((image, i) => (
-              <motion.div
-                key={image.src}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => {
-                  setIndex(i);
-                  setOpen(true);
-                }}
-                className="group relative h-72 overflow-hidden rounded-3xl cursor-pointer"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  priority={i === 0}
-                  sizes="100vw"
-                  className="object-cover transition duration-700 group-hover:scale-110"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-                <div className="absolute bottom-6 left-6 text-white">
-                  <p className="mb-2 text-xs uppercase tracking-[0.35em] text-white/80">
-                    {image.category}
-                  </p>
-
-                  <h3 className="text-2xl font-light">
-                    {image.alt}
-                  </h3>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* ================= DESKTOP ================= */}
-
-          <div className="hidden lg:grid lg:grid-cols-4 lg:auto-rows-[280px] gap-5">
             {gallery.map((image, i) => (
               <motion.div
                 key={image.src}
@@ -97,9 +53,7 @@ export default function Gallery() {
                   setOpen(true);
                 }}
                 className={`group relative overflow-hidden rounded-3xl cursor-pointer ${
-                  i === 0
-                    ? "col-span-2 row-span-2"
-                    : ""
+                  i === 0 ? "lg:col-span-2 lg:row-span-2" : ""
                 }`}
               >
                 <Image
@@ -107,13 +61,15 @@ export default function Gallery() {
                   alt={image.alt}
                   fill
                   priority={i === 0}
-                  sizes="25vw"
+                  sizes="(max-width:640px) 100vw,
+                         (max-width:1024px) 50vw,
+                         25vw"
                   className="object-cover transition duration-700 group-hover:scale-110"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-                <div className="absolute bottom-6 left-6 translate-y-4 opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="absolute bottom-6 left-6">
                   <p className="mb-2 text-xs uppercase tracking-[0.35em] text-white/80">
                     {image.category}
                   </p>
@@ -124,6 +80,7 @@ export default function Gallery() {
                 </div>
               </motion.div>
             ))}
+
           </div>
 
         </div>
