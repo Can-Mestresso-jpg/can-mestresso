@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
@@ -24,7 +24,7 @@ export default function FadeIn({
       }}
       viewport={{
         once: true,
-        amount: 0.25,
+        margin: "0px 0px -100px 0px",
       }}
       transition={{
         duration: 0.8,

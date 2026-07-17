@@ -23,9 +23,9 @@ export default function Gallery() {
 
   return (
     <section id="gallery" className="bg-white py-16 sm:py-24 lg:py-32">
-      <FadeIn delay={0.2}>
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
 
+        <FadeIn delay={0.2}>
           <div className="mb-16 text-center">
             <p className="uppercase tracking-[0.35em] text-sm text-gray-500">
               Gallery
@@ -40,7 +40,9 @@ export default function Gallery() {
               interiors, discover every corner of Can Mestresso.
             </p>
           </div>
+        </FadeIn>
 
+        <FadeIn delay={0.3}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[260px]">
 
             {gallery.map((image, i) => (
@@ -82,42 +84,42 @@ export default function Gallery() {
             ))}
 
           </div>
+        </FadeIn>
 
-        </div>
+      </div>
 
-        <Lightbox
-          open={open}
-          close={() => setOpen(false)}
-          index={index}
-          slides={gallery}
-          plugins={[
-            Zoom,
-            Fullscreen,
-            Counter,
-            Thumbnails,
-          ]}
-          carousel={{
-            finite: false,
-          }}
-          zoom={{
-            maxZoomPixelRatio: 3,
-            scrollToZoom: true,
-          }}
-          controller={{
-            closeOnBackdropClick: true,
-          }}
-          thumbnails={{
-            position: "bottom",
-            border: 0,
-            borderRadius: 12,
-          }}
-          styles={{
-            container: {
-              backgroundColor: "#000",
-            },
-          }}
-        />
-      </FadeIn>
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        index={index}
+        slides={gallery}
+        plugins={[
+          Zoom,
+          Fullscreen,
+          Counter,
+          Thumbnails,
+        ]}
+        carousel={{
+          finite: false,
+        }}
+        zoom={{
+          maxZoomPixelRatio: 3,
+          scrollToZoom: true,
+        }}
+        controller={{
+          closeOnBackdropClick: true,
+        }}
+        thumbnails={{
+          position: "bottom",
+          border: 0,
+          borderRadius: 12,
+        }}
+        styles={{
+          container: {
+            backgroundColor: "#000",
+          },
+        }}
+      />
     </section>
   );
 }
