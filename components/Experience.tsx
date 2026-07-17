@@ -9,7 +9,7 @@ export default function Experience() {
 
         <div>
           <Image
-            src="/piscina.png"
+            src="/gallery/exterior/exterior1.jpg"
             alt="Villa"
             width={900}
             height={900}
